@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Class Time Table - Rishav Roy</title>
   <meta name="description" content="A simple class timetable web app built by Rishav Roy. Organize your daily schedule easily." />
-  
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#121212">
+
   <!-- Open Graph tags for social media preview -->
   <meta property="og:title" content="Class Time Table - Rishav Roy" />
   <meta property="og:description" content="A simple class timetable web app built by Rishav Roy. Organize your daily schedule easily." />
@@ -239,6 +242,16 @@
     // Auto detect real time (default)
     getCurrentClass();
     setInterval(getCurrentClass, 60 * 1000); // Auto refresh every minute
+
+    if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then((reg) => console.log("Service Worker registered", reg))
+      .catch((err) => console.log("SW registration failed", err));
+  });
+}
+
   </script>
 </body>
 </html>
