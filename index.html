@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Timetable App - Fixed Version</title>
+  <style>
+    body {
+      background-color: #121212;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
+        linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%);
+      background-size: 100% 100%;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 93vh;
+    }
+
+    h1 {
+      color: #90caf9;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .class-name {
+      font-size: 1.1em;
+      color: #bb86fc;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .card {
+      background-color: #1e1e1e;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      max-width: 450px;
+      width: 100%;
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .label {
+      font-size: 1.1em;
+      color: #bb86fc;
+      margin-bottom: 8px;
+    }
+
+    .value {
+      font-size: 1.2em;
+      color: #ffffff;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .tester {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    select, input[type="time"] {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #2a2a2a;
+      color: #e0e0e0;
+      margin: 5px;
+    }
+
+    button {
+      background-color: #bb86fc;
+      color: #121212;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background-color: #9a68dc;
+    }
+
+    footer {
+      margin-top: auto;
+      font-size: 0.9em;
+      color: #888;
+      text-align: center;
+      padding: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>📅 College Timetable App</h1>
+  <div class="class-name">AIML 2A</div>
+
+  <div class="card">
+    <div class="label">Current Time:</div>
+    <div class="value" id="currentTime">Loading...</div>
+    <div class="label">Current Status:</div>
+    <div class="value" id="currentStatus">Loading...</div>
+    <div class="label">Next Class:</div>
+    <div class="value" id="nextClass">Loading...</div>
+  </div>
+
+  <div class="tester">
+    <h3>🕒 Test Time Manually:</h3>
+    <select id="daySelect">
+      <option value="Monday">Monday</option>
+      <option value="Tuesday">Tuesday</option>
+      <option value="Wednesday">Wednesday</option>
+      <option value="Thursday">Thursday</option>
+      <option value="Friday">Friday</option>
+    </select>
+    <input type="time" id="timeInput" value="10:00">
+    <button onclick="manualTest()">Test</button>
+  </div>
+
+  <footer>⏰ Auto updates every minute • You can also test manually above</footer>
+
+  <script>
+    const timetable = {
+      "Monday": [
+        "Lab: AM391 & AM392", "Lab: AM391 & AM392", "Lab: AM391 & AM392",
+        "EC(AM301)/ABS/504", "BREAK", "BREAK",
+        "Lab: AM391 & AM392", "Lab: AM391 & AM392", "Lab: AM391 & AM392",
+        "", "", ""
+      ],
+      "Tuesday": [
+        "", "", "AM302/AIML2A/DSR/504",
+        "Lab: EC(AM391) & AM395", "Lab: EC(AM391) & AM395", "Lab: EC(AM391) & AM395",
+        "BREAK", "BREAK", "AM201/AIML2A/NDN/307",
+        "Lab: AM399 & EC(AM391)", "Lab: AM399 & EC(AM391)", ""
+      ],
+      "Wednesday": [
+        "AM301/AIML2A/NDN/307", "MATHS/AIML2A/NLS/307", "EC(AM301)/AIML2A/ABS/307",
+        "", "", "", "", "", "", "", "", ""
+      ],
+      "Thursday": [
+        "AM302/AIML2A/DSR/307", "MATHS/AIML2A/NLS/307", "EC(AM301)/AIML2A/ABS/408",
+        "", "", "", "", "", "", "", "", ""
+      ],
+      "Friday": [
+        "AM301/AIML2A/NDN/307", "MATHS/AIML2A/SKL/307", "AM302/AIML2A/DSR/504",
+        "", "", "", "", "", "", "", "", ""
+      ]
+    };
+
+    const timeSlots = [
+      "10:00", "10:40", "11:20", "12:00", "12:40",
+      "13:20", "14:00", "14:40", "15:20", "16:00", "16:40"
+    ];
+
+    function getCurrentClass(customDay = null, customTime = null) {
+      let now = new Date();
+      let currentDay = customDay || ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][now.getDay()];
+      let currentTime = customTime ? parseFloat(customTime.split(":")[0]) + parseFloat(customTime.split(":")[1]) / 60
+                                   : now.getHours() + now.getMinutes() / 60;
+
+      // Update Current Time Display
+      document.getElementById("currentTime").innerText = customTime ? `${customTime} (${currentDay})` : now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ` (${currentDay})`;
+
+      if (currentDay === "Saturday" || currentDay === "Sunday") {
+        document.getElementById("currentStatus").innerText = "Holiday (Weekend)";
+        document.getElementById("nextClass").innerText = "-";
+        return;
+      }
+
+      const todayClasses = timetable[currentDay];
+      let currentSlot = -1;
+
+      for (let i = 0; i < timeSlots.length; i++) {
+        const [hour, minute] = timeSlots[i].split(":").map(Number);
+        const slotTime = hour + minute / 60;
+        const nextSlotTime = i < timeSlots.length - 1 ? (parseFloat(timeSlots[i + 1].split(":")[0]) + parseFloat(timeSlots[i + 1].split(":")[1]) / 60) : 24;
+
+        if (currentTime >= slotTime && currentTime < nextSlotTime) {
+          currentSlot = i;
+          break;
+        }
+      }
+
+      if (currentSlot === -1) {
+        document.getElementById("currentStatus").innerText = "Outside of school hours";
+        document.getElementById("nextClass").innerText = "-";
+        return;
+      }
+
+      const currentClassInfo = todayClasses[currentSlot];
+      const currentSlotTime = timeSlots[currentSlot];
+      if (currentClassInfo && currentClassInfo.trim() !== "") {
+        document.getElementById("currentStatus").innerText = `${currentClassInfo} (${currentSlotTime})`;
+      } else {
+        document.getElementById("currentStatus").innerText = `Break or No Class (${currentSlotTime})`;
+      }
+
+      // Search for next upcoming class after current slot
+      let nextClassInfo = "No upcoming class today";
+      for (let i = currentSlot + 1; i < todayClasses.length; i++) {
+        if (todayClasses[i] && todayClasses[i].trim() !== "" && todayClasses[i].trim().toUpperCase() !== "BREAK") {
+          nextClassInfo = `${todayClasses[i]} (${timeSlots[i]})`;
+          break;
+        }
+      }
+
+      document.getElementById("nextClass").innerText = nextClassInfo;
+    }
+
+    function manualTest() {
+      const selectedDay = document.getElementById("daySelect").value;
+      const selectedTime = document.getElementById("timeInput").value;
+      getCurrentClass(selectedDay, selectedTime);
+    }
+
+    // Auto detect real time (default)
+    getCurrentClass();
+    setInterval(getCurrentClass, 60 * 1000); // Auto refresh every minute
+  </script>
+</body>
+</html>
