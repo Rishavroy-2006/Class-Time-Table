@@ -74,7 +74,7 @@
       }
 
       td.time {
-        background-color: #311b92;
+        background-color:#8938d1;
         color: #fff;
         font-weight: bold;
         white-space: nowrap;
@@ -249,7 +249,7 @@
         "14:40",
         "15:20",
         "16:00",
-        "16:40",
+        // "16:40",
       ];
 
       const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -291,7 +291,7 @@
         const tr = document.createElement("tr");
 
         const timeTd = document.createElement("td");
-        timeTd.textContent = `${timeSlots[i]} - ${timeSlots[i + 1] || "END"}`;
+        timeTd.textContent = `${timeSlots[i]} - ${timeSlots[i + 1] || "18:00"}`;
         timeTd.classList.add("time");
         tr.appendChild(timeTd);
 
