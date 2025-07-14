@@ -153,32 +153,79 @@
   <footer>⏰ Auto updates every minute • You can also test manually above</footer>
 
   <script>
-    const timetable = {
-      "Monday": [
-        "Lab: AM391[X] & AM392[Y]", "Lab: AM391[X] & AM392[Y]", "Lab: AM391[X] & AM392[Y]",
-        "EC(AM301)/ABS/504", "BREAK", "BREAK",
-        "Lab: AM391[Y] & AM392[X]", "Lab: AM391[Y] & AM392[X]", "Lab: AM391[Y] & AM392[X]",
-        "", "", ""
-      ],
-      "Tuesday": [
-        "", "", "AM302/AIML2A/DSR/504",
-        "Lab: EC(AM391)[X] & AM393[Y]", "Lab: EC(AM391)[X] & AM393[Y]", "Lab: EC(AM391)[X] & AM393[Y]",
-        "BREAK", "BREAK", "AM201/NDN/307",
-        "Lab: AM393[X] & EC(AM391)[Y]", "Lab: AM393(X) & EC(AM391)[Y]", ""
-      ],
-      "Wednesday": [
-        "AM301/NDN/307", "MATHS/NLS/307", "EC(AM301)/ABS/307",
-        "", "", "", "", "", "", "", "", ""
-      ],
-      "Thursday": [
-        "AM302/DSR/307", "MATHS/NLS/307", "EC(AM301)/ABS/408",
-        "", "", "", "", "", "", "", "", ""
-      ],
-      "Friday": [
-        "AM301/NDN/307", "MATHS/SKL/307", "AM302/DSR/504",
-        "", "", "", "", "", "", "", "", ""
-      ]
-    };
+<script>
+      const timetable = {
+        Monday: [
+          "Lab: COA Lab (AM391)/NF/316Q(X) & DAA Lab (AM392)/NDN/316O(Y)",
+          "Lab: COA Lab (AM391)/NF/316Q(X) & DAA Lab (AM392)/NDN/316O(Y)",
+          "Lab: COA Lab (AM391)/NF/316Q(X) & DAA Lab (AM392)/NDN/316O(Y)",
+          "Analog & Digital Electronics (EC(AM)301)/ABS/504",
+          "BREAK",
+          "BREAK",
+          "Lab: COA Lab (AM391)/NF/316Q(Y) & DAA Lab (AM392)/NDN/316O(X)",
+          "Lab: COA Lab (AM391)/NF/316Q(Y) & DAA Lab (AM392)/NDN/316O(X)",
+          "Lab: COA Lab (AM391)/NF/316Q(Y) & DAA Lab (AM392)/NDN/316O(X)",
+          "",
+          "",
+          "",
+        ],
+        Tuesday: [
+          "",
+          "",
+          "Design & Analysis of Algo (AM302)/AIML2A/DSR/504",
+          "Lab: A&D Electronics Lab (EC(AM)391)/ABS/0(X) & IT Workshop (AM393)/KSB/316(Y)",
+          "Lab: A&D Electronics Lab (EC(AM)391)/ABS/0(X) & IT Workshop (AM393)/KSB/316(Y)",
+          "Lab: A&D Electronics Lab (EC(AM)391)/ABS/0(X) & IT Workshop (AM393)/KSB/316(Y)",
+          "BREAK",
+          "BREAK",
+          "Data Structures (AM201)/AIML2A/NDN/307",
+          "Lab: IT Workshop (AM393)/GPP/316(X) & A&D Electronics Lab (EC(AM)391)/ABS/0(Y)",
+          "Lab: IT Workshop (AM393)/GPP/316(X) & A&D Electronics Lab (EC(AM)391)/ABS/0(Y)",
+          "",
+        ],
+        Wednesday: [
+          "Computer Org. & Arch. (AM301)/AIML2A/NDN/307",
+          "Discrete Math (M(AM)301)/AIML2A/NLS/307",
+          "Analog & Digital Electronics (EC(AM)301)/AIML2A/ABS/307",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+        ],
+        Thursday: [
+          "Design & Analysis of Algo (AM302)/AIML2A/DSR/307",
+          "Discrete Math (M(AM)301)/AIML2A/NLS/307",
+          "Analog & Digital Electronics (EC(AM)301)/AIML2A/ABS/408",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+        ],
+        Friday: [
+          "Computer Org. & Arch. (AM301)/AIML2A/NDN/307",
+          "Discrete Math (M(AM)301)/AIML2A/SKL/307",
+          "Design & Analysis of Algo (AM302)/AIML2A/DSR/504",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+        ],
+      };
 
     const timeSlots = [
       "10:00", "10:40", "11:20", "12:00", "12:40",
