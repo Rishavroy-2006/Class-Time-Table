@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Colorful Class Timetable</title>
+    <style>
+      body {
+        background-color: #121212;
+        color: #ddd;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 20px;
+        padding-bottom: 40px; /* for button spacing */
+      }
+
+      h2 {
+        text-align: center;
+        color: #ffffff;
+        margin-bottom: 20px;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        margin-bottom: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        min-width: 600px; /* min width to allow horizontal scroll on small screens */
+      }
+
+      th,
+      td {
+        border: 1px solid #444;
+        padding: 10px 8px;
+        font-size: 13px;
+        vertical-align: middle;
+        word-wrap: break-word;
+        text-align: center;
+      }
+
+      th {
+        background-color: #4a148c;
+        color: white;
+      }
+
+      td {
+        background-color: #1e1e1e;
+      }
+
+      td.lab {
+        background-color: #b3e5fc; /* Light Blue */
+        color: #01579b; /* Dark Blue */
+        font-weight: bold;
+      }
+
+      td.break {
+        background-color: #cfd8dc;
+        color: #333;
+        font-style: italic;
+      }
+
+      td.class {
+        background-color: #c8e6c9; /* Light Green */
+        color: #1b5e20; /* Dark Green */
+        font-weight: 500;
+      }
+
+      td.empty {
+        background-color: #212121;
+        color: #555;
+      }
+
+      td.time {
+        background-color: #311b92;
+        color: #fff;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      button.back-btn {
+        display: block;
+        margin: 0 auto;
+        background-color: #4a148c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button.back-btn:hover {
+        background-color: #6a25c8;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 600px) {
+        body {
+          margin: 10px;
+          font-size: 12px; /* Slightly smaller font */
+        }
+
+        h2 {
+          font-size: 18px;
+          margin-bottom: 15px;
+        }
+
+        table {
+          min-width: 700px; /* ensure horizontal scroll */
+        }
+
+        th,
+        td {
+          padding: 6px 5px;
+          font-size: 11px;
+        }
+
+        td.time {
+          font-size: 12px;
+          padding: 8px 6px;
+        }
+      }
+
+      .dot-indicator {
+        width: 10px;
+        height: 10px;
+        background-color: #00ff99;
+        border-radius: 50%;
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        box-shadow: 0 0 6px #929292;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Full Week Class Timetable</h2>
+    <div class="table-container">
+      <table id="timetable">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <!-- JS will inject rows here -->
+        </tbody>
+      </table>
+    </div>
+
+    <button class="back-btn" onclick="history.back()">← Back</button>
+
+    <script>
+      const timetable = {
+        Monday: [
+          "Lab: COA Lab (AM391)/NF/316Q(X) & DAA Lab (AM392)/NDN/316O(Y)",
+          "Lab: COA Lab (AM391)/NF/316Q(X) & DAA Lab (AM392)/NDN/316O(Y)",
+          "Lab: COA Lab (AM391)/NF/316Q(X) & DAA Lab (AM392)/NDN/316O(Y)",
+          "Analog & Digital Electronics (EC(AM)301)/ABS/504",
+          "BREAK",
+          "BREAK",
+          "Lab: COA Lab (AM391)/NF/316Q(Y) & DAA Lab (AM392)/NDN/316O(X)",
+          "Lab: COA Lab (AM391)/NF/316Q(Y) & DAA Lab (AM392)/NDN/316O(X)",
+          "Lab: COA Lab (AM391)/NF/316Q(Y) & DAA Lab (AM392)/NDN/316O(X)",
+          "",
+          "",
+          "",
+        ],
+        Tuesday: [
+          "",
+          "",
+          "Design & Analysis of Algo (AM302)/AIML2A/DSR/504",
+          "Lab: A&D Electronics Lab (EC(AM)391)/ABS/0(X) & IT Workshop (AM393)/KSB/316(Y)",
+          "Lab: A&D Electronics Lab (EC(AM)391)/ABS/0(X) & IT Workshop (AM393)/KSB/316(Y)",
+          "Lab: A&D Electronics Lab (EC(AM)391)/ABS/0(X) & IT Workshop (AM393)/KSB/316(Y)",
+          "BREAK",
+          "BREAK",
+          "Data Structures (AM201)/AIML2A/NDN/307",
+          "Lab: IT Workshop (AM393)/GPP/316(X) & A&D Electronics Lab (EC(AM)391)/ABS/0(Y)",
+          "Lab: IT Workshop (AM393)/GPP/316(X) & A&D Electronics Lab (EC(AM)391)/ABS/0(Y)",
+          "",
+        ],
+        Wednesday: [
+          "Computer Org. & Arch. (AM301)/AIML2A/NDN/307",
+          "Discrete Math (M(AM)301)/AIML2A/NLS/307",
+          "Analog & Digital Electronics (EC(AM)301)/AIML2A/ABS/307",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+        ],
+        Thursday: [
+          "Design & Analysis of Algo (AM302)/AIML2A/DSR/307",
+          "Discrete Math (M(AM)301)/AIML2A/NLS/307",
+          "Analog & Digital Electronics (EC(AM)301)/AIML2A/ABS/408",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+        ],
+        Friday: [
+          "Computer Org. & Arch. (AM301)/AIML2A/NDN/307",
+          "Discrete Math (M(AM)301)/AIML2A/SKL/307",
+          "Design & Analysis of Algo (AM302)/AIML2A/DSR/504",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+        ],
+      };
+
+      const timeSlots = [
+        "10:00",
+        "10:40",
+        "11:20",
+        "12:00",
+        "12:40",
+        "13:20",
+        "14:00",
+        "14:40",
+        "15:20",
+        "16:00",
+        "16:40",
+      ];
+
+      const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+      const tbody = document.getElementById("tbody");
+
+      function createDot() {
+        const dot = document.createElement("span");
+        dot.className = "dot-indicator";
+        return dot;
+      }
+
+      function getCurrentSlotIndex() {
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        const slotTimes = [
+          [600, 640],
+          [640, 680],
+          [680, 720],
+          [720, 760],
+          [760, 800],
+          [800, 840],
+          [840, 880],
+          [880, 920],
+          [920, 960],
+          [960, 1000],
+          [1000, 1040],
+        ];
+
+        for (let i = 0; i < slotTimes.length; i++) {
+          const [start, end] = slotTimes[i];
+          if (currentMinutes >= start && currentMinutes < end) {
+            return i;
+          }
+        }
+        return -1;
+      }
+
+      for (let i = 0; i < timeSlots.length; i++) {
+        const tr = document.createElement("tr");
+
+        const timeTd = document.createElement("td");
+        timeTd.textContent = `${timeSlots[i]} - ${timeSlots[i + 1] || "END"}`;
+        timeTd.classList.add("time");
+        tr.appendChild(timeTd);
+
+        for (const day of days) {
+          const td = document.createElement("td");
+          const entry = timetable[day][i] || "";
+
+          if (!entry.trim()) {
+            td.classList.add("empty");
+            td.textContent = "—";
+          } else if (entry.toUpperCase().includes("BREAK")) {
+            td.classList.add("break");
+            td.textContent = "BREAK";
+          } else if (entry.toUpperCase().includes("LAB")) {
+            td.classList.add("lab");
+            td.textContent = entry;
+          } else {
+            td.classList.add("class");
+            td.textContent = entry;
+          }
+
+          tr.appendChild(td);
+        }
+
+        tbody.appendChild(tr);
+      }
+
+      function highlightCurrentClass() {
+        const slotIndex = getCurrentSlotIndex();
+        if (slotIndex === -1) return;
+
+        const now = new Date();
+        const currentDay = days[now.getDay() - 1]; // Sunday = 0
+
+        if (!currentDay || !timetable[currentDay]) return;
+
+        const tr = tbody.children[slotIndex];
+        const td = tr.children[now.getDay()]; // +1 because first td is time
+
+        if (
+          !td ||
+          td.classList.contains("empty") ||
+          td.classList.contains("break")
+        )
+          return;
+
+        const dot = createDot();
+        td.style.position = "relative";
+        td.appendChild(dot);
+      }
+
+      highlightCurrentClass();
+      setInterval(() => {
+        document
+          .querySelectorAll(".dot-indicator")
+          .forEach((dot) => dot.remove());
+        highlightCurrentClass();
+      }, 60000);
+    </script>
+  </body>
+</html>
