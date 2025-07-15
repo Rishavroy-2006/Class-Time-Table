@@ -127,6 +127,15 @@
       padding: 20px 0;
     }
   </style>
+  <script>
+  const currentVersion = 'v3'; // change this every time you update the site
+
+  if (localStorage.getItem('site-version') !== currentVersion) {
+    localStorage.setItem('site-version', currentVersion);
+    location.reload(true); // forces reload only once
+  }
+</script>
+
 </head>
 <body>
   <h1>📅 College Timetable App</h1>
