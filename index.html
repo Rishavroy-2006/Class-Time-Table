@@ -149,6 +149,8 @@
     <div class="label">Next Class:</div>
     <div class="value" id="nextClass">Loading...</div>
   </div>
+  
+  <div id="dailyTip" style="margin-top: 10px; font-style: italic; color: #aaa;"></div>
 
   <div class="tester">
     <h3>🕒 Test Time Manually:</h3>
@@ -324,6 +326,24 @@
       .catch((err) => console.log("SW registration failed", err));
   });
 }
+const dailyTips = [
+  "📘 Tip: Review class notes every evening for 15 mins!",
+  "🧠 Fun Fact: Studying before sleep helps retention.",
+  "💡 Tip: Take short breaks between long study sessions.",
+  "🚀 Motivation: You’re closer than you think!",
+  "📅 Planning: Update your goals every Sunday night.",
+  "🎯 Focus: Eliminate distractions for 25 mins and take 5 mins break.",
+  "🌱 Reminder: Progress > Perfection.",
+  "📚 Tip: Summarize what you learn in your own words.",
+  "🔋 Recharge: Sleep well – brain needs rest too.",
+  "📈 Boost: Try teaching a concept to someone else.",
+  "🔍 Trick: Use the Feynman Technique to deeply understand topics.",
+  "🎧 Hack: Try instrumental music while studying.",
+  "📝 Strategy: Set 3 micro-goals each morning.",
+  "🙌 Truth: Small consistent effort beats rare big effort."
+];
+const tipIndex = new Date().getDay() % dailyTips.length;
+document.getElementById("dailyTip").innerText = dailyTips[tipIndex];
 
   </script>
 </body>
