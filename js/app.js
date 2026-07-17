@@ -402,8 +402,8 @@ function renderFullTimetable() {
 }
 
 // SPA Routing logic to eliminate flickering
-let todayInterval;
-let timetableInterval;
+let todayInterval = null;
+let timetableInterval = null;
 
 function loadProfileData() {
   const name = localStorage.getItem('studentName') || 'Student Name';
@@ -515,6 +515,9 @@ function initApp() {
   }
 }
 
+let lastRenderedFile = window.location.pathname.split('/').pop() || "index.html";
+if (lastRenderedFile && !lastRenderedFile.endsWith('.html')) lastRenderedFile += '.html';
+
 async function navigateTo(href) {
   try {
     const res = await fetch(href);
@@ -542,6 +545,7 @@ async function navigateTo(href) {
     }
     
     document.title = doc.title;
+    lastRenderedFile = href;
     
     initApp();
   } catch (err) {
@@ -564,8 +568,7 @@ function handleRoute() {
   let hash = window.location.hash.replace("#", "");
   const fileToFetch = routes[hash] || "index.html";
   
-  const currentPath = window.location.pathname.split('/').pop() || "index.html";
-  if (currentPath !== fileToFetch) {
+  if (lastRenderedFile !== fileToFetch) {
     navigateTo(fileToFetch);
   } else {
     initApp();
@@ -577,6 +580,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!window.timetableData) {
     console.error("Timetable data not found!");
     return;
+  }
+
+  // Handle direct access to clean URLs without hashes (e.g. /timetable)
+  if (!window.location.hash) {
+    let currentPath = window.location.pathname.split('/').pop();
+    if (currentPath && currentPath !== "index.html") {
+      if (!currentPath.endsWith('.html')) currentPath += '.html';
+      const routeKey = Object.keys(routes).find(key => routes[key] === currentPath);
+      if (routeKey) {
+        window.location.hash = routeKey;
+      }
+    }
   }
   
   handleRoute();
