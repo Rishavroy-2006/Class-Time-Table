@@ -4,7 +4,7 @@
   "description": "A sleek, interactive **College Class Timetable Web App**, built using **HTML, CSS, and JavaScript**, and developed with assistance from **AI tools like ChatGPT**. Hosted on Vercel, it’s fully responsive and designed to simplify how students track their weekly class schedule.",
   "main": "service-worker.js",
   "scripts": {
-    "build": "tailwindcss -i ./css/input.css -o ./css/styles.css"
+    "build": "tailwindcss -i ./css/input.css -o ./css/styles.css && mkdir -p public && cp -r *.html css js favicon *.png manifest.json service-worker.js public/ 2>/dev/null || true"
   },
   "repository": {
     "type": "git",
