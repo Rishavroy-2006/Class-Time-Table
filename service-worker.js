@@ -1,4 +1,4 @@
-const CACHE_NAME = "v6"; // Increment the version each time you deploy
+const CACHE_NAME = "v7"; // Increment the version each time you deploy
 
 const urlsToCache = [
   "/",
@@ -7,7 +7,9 @@ const urlsToCache = [
   "/courses.html",
   "/tasks.html",
   "/exams.html",
+  "/settings.html",
   "/css/styles.css",
+  "/css/styles.css?v=2",
   "/js/data.js",
   "/js/app.js",
   "/manifest.json",
@@ -46,6 +48,6 @@ self.addEventListener("fetch", (event) => {
       .then((response) => {
         return response;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() => caches.match(event.request, { ignoreSearch: true }))
   );
 });
