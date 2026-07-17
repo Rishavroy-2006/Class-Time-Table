@@ -1,350 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class Time Table - AIML 2-A</title>
-  <meta name="description" content="A simple class timetable web app built by Rishav Roy. Organize your daily schedule easily." />
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>StudyHall - Dashboard</title>
   
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
 
   <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#121212">
-
-   <link rel="shortcut icon" href="icon-192.png" type="image/x-icon">
-   <link rel="shortcut icon" href="icon-512.png" type="image/x-icon">
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" >
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" >
-  <link rel="shortcut icon" href="/favicon.ico" >
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" >
-  <link rel="manifest" href="/site.webmanifest" >
-  <!-- Open Graph tags for social media preview -->
-  <meta property="og:title" content="Class Time Table - Rishav Roy" />
-  <meta property="og:description" content="A simple class timetable web app built by Rishav Roy. Organize your daily schedule easily." />
-  <meta property="og:image" content="https://rishavroy-2006.github.io/Class-Time-Table/preview-image.png" />
-  <meta property="og:url" content="https://rishavroy-2006.github.io/Class-Time-Table/" />
+  <meta name="theme-color" content="#faf9fd">
   
-  <!-- Twitter Card tags -->
-  <meta name="twitter:title" content="Class Time Table - Rishav Roy" />
-  <meta name="twitter:description" content="A simple class timetable web app built by Rishav Roy. Organize your daily schedule easily." />
-  <meta name="twitter:image" content="https://rishavroy-2006.github.io/Class-Time-Table/preview-image.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <style>
-    body {
-      background-color: #121212;
-      background-image: 
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
-        linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
-        linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%);
-      background-size: 100% 100%;
-      color: #e0e0e0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 15px;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 93vh;
-    }
-
-    h1 {
-      color: #90caf9;
-      margin-bottom: 5px;
-      text-align: center;
-    }
-
-    .class-name {
-      font-size: 1.1em;
-      color: #bb86fc;
-      margin-bottom: 20px;
-      font-weight: bold;
-    }
-
-    .card {
-      background-color: #1e1e1e;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-      max-width: 450px;
-      width: 100%;
-      transition: 0.3s ease;
-    }
-
-    .card:hover {
-      transform: scale(1.02);
-    }
-
-    .label {
-      font-size: 1.1em;
-      color: #bb86fc;
-      margin-bottom: 8px;
-    }
-
-    .value {
-      font-size: 1.2em;
-      color: #ffffff;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .tester {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    select, input[type="time"] {
-      padding: 8px 12px;
-      border: none;
-      border-radius: 8px;
-      background-color: #2a2a2a;
-      color: #e0e0e0;
-      margin: 5px;
-    }
-
-    button {
-      background-color: #bb86fc;
-      color: #121212;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: 0.2s;
-    }
-
-    button:hover {
-      background-color: #9a68dc;
-    }
-
-    footer {
-      margin-top: auto;
-      font-size: 0.9em;
-      color: #888;
-      text-align: center;
-      padding: 20px 0;
-    }
-  </style>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Mono&amp;display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  
   <script>
-  const currentVersion = 'v3'; // change this every time you update the site
-
-  if (localStorage.getItem('site-version') !== currentVersion) {
-    localStorage.setItem('site-version', currentVersion);
-    location.reload(true); // forces reload only once
-  }
-</script>
-
-</head>
-<body>
-  <h1>📅 College Timetable App</h1>
-  <div class="class-name">AIML 2A</div>
-
-  <div class="card">
-    <div class="label">Current Time:</div>
-    <div class="value" id="currentTime">Loading...</div>
-    <div class="label">Current Status:</div>
-    <div class="value" id="currentStatus">Loading...</div>
-    <div class="label">Next Class:</div>
-    <div class="value" id="nextClass">Loading...</div>
-  </div>
-  
-  <div id="dailyTip" style="margin-top: 10px; font-style: italic; color: #aaa;"></div>
-
-  <div class="tester">
-    <h3>🕒 Test Time Manually:</h3>
-    <select id="daySelect">
-      <option value="Monday">Monday</option>
-      <option value="Tuesday">Tuesday</option>
-      <option value="Wednesday">Wednesday</option>
-      <option value="Thursday">Thursday</option>
-      <option value="Friday">Friday</option>
-    </select>
-    <input type="time" id="timeInput" value="10:00">
-    <button onclick="manualTest()">Test</button>
-  </div>
-
-  
-  <div style="text-align: center; margin-top: 15px">
-      <button onclick="window.location.href='timetable.html'">
-        Open Full Timetable
-      </button>
-  </div>
-  
-  <footer>⏰ Auto updates every minute • You can also test manually above</footer>
-
-<script>
-      const timetable = {
-        Monday: [
-          "Lab: COA Lab (AM391)/NF/316Q(X) & DAA Lab (AM392)/NDN/316O(Y)",
-          "Lab: COA Lab (AM391)/NF/316Q(X) & DAA Lab (AM392)/NDN/316O(Y)",
-          "Lab: COA Lab (AM391)/NF/316Q(X) & DAA Lab (AM392)/NDN/316O(Y)",
-          "Analog & Digital Electronics (EC(AM)301)/ABS/504",
-          "BREAK",
-          "BREAK",
-          "Lab: COA Lab (AM391)/NF/316Q(Y) & DAA Lab (AM392)/NDN/316O(X)",
-          "Lab: COA Lab (AM391)/NF/316Q(Y) & DAA Lab (AM392)/NDN/316O(X)",
-          "Lab: COA Lab (AM391)/NF/316Q(Y) & DAA Lab (AM392)/NDN/316O(X)",
-          "",
-          "",
-          "",
-        ],
-        Tuesday: [
-          "",
-          "",
-          "Design & Analysis of Algo (AM302)/AIML2A/DSR/504",
-          "Lab: A&D Electronics Lab (EC(AM)391)/ABS/0(X) & IT Workshop (AM393)/KSB/316(Y)",
-          "Lab: A&D Electronics Lab (EC(AM)391)/ABS/0(X) & IT Workshop (AM393)/KSB/316(Y)",
-          "Lab: A&D Electronics Lab (EC(AM)391)/ABS/0(X) & IT Workshop (AM393)/KSB/316(Y)",
-          "BREAK",
-          "BREAK",
-          "Data Structures (AM201)/AIML2A/NDN/307",
-          "Lab: IT Workshop (AM393)/GPP/316(X) & A&D Electronics Lab (EC(AM)391)/ABS/0(Y)",
-          "Lab: IT Workshop (AM393)/GPP/316(X) & A&D Electronics Lab (EC(AM)391)/ABS/0(Y)",
-          "",
-        ],
-        Wednesday: [
-          "Computer Org. & Arch. (AM301)/AIML2A/NDN/307",
-          "Discrete Math (M(AM)301)/AIML2A/NLS/307",
-          "Analog & Digital Electronics (EC(AM)301)/AIML2A/ABS/307",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-        ],
-        Thursday: [
-          "Design & Analysis of Algo (AM302)/AIML2A/DSR/307",
-          "Discrete Math (M(AM)301)/AIML2A/NLS/307",
-          "Analog & Digital Electronics (EC(AM)301)/AIML2A/ABS/408",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-        ],
-        Friday: [
-          "Computer Org. & Arch. (AM301)/AIML2A/NDN/307",
-          "Discrete Math (M(AM)301)/AIML2A/SKL/307",
-          "Design & Analysis of Algo (AM302)/AIML2A/DSR/504",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-        ],
-      };
-
-    const timeSlots = [
-      "10:00", "10:40", "11:20", "12:00", "12:40",
-      "13:20", "14:00", "14:40", "15:20", "16:00", "16:40"
-    ];
-
-    function getCurrentClass(customDay = null, customTime = null) {
-      let now = new Date();
-      let currentDay = customDay || ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][now.getDay()];
-      let currentTime = customTime ? parseFloat(customTime.split(":")[0]) + parseFloat(customTime.split(":")[1]) / 60
-                                   : now.getHours() + now.getMinutes() / 60;
-
-      // Update Current Time Display
-      document.getElementById("currentTime").innerText = customTime ? `${customTime} (${currentDay})` : now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ` (${currentDay})`;
-
-      if (currentDay === "Saturday" || currentDay === "Sunday") {
-        document.getElementById("currentStatus").innerText = "Holiday (Weekend)";
-        document.getElementById("nextClass").innerText = "-";
-        return;
-      }
-
-      const todayClasses = timetable[currentDay];
-      let currentSlot = -1;
-
-      for (let i = 0; i < timeSlots.length; i++) {
-        const [hour, minute] = timeSlots[i].split(":").map(Number);
-        const slotTime = hour + minute / 60;
-        const nextSlotTime = i < timeSlots.length - 1 ? (parseFloat(timeSlots[i + 1].split(":")[0]) + parseFloat(timeSlots[i + 1].split(":")[1]) / 60) : 24;
-
-        if (currentTime >= slotTime && currentTime < nextSlotTime) {
-          currentSlot = i;
-          break;
-        }
-      }
-
-      if (currentSlot === -1) {
-        document.getElementById("currentStatus").innerText = "Outside of school hours";
-        document.getElementById("nextClass").innerText = "-";
-        return;
-      }
-
-      const currentClassInfo = todayClasses[currentSlot];
-      const currentSlotTime = timeSlots[currentSlot];
-      if (currentClassInfo && currentClassInfo.trim() !== "") {
-        document.getElementById("currentStatus").innerText = `${currentClassInfo} (${currentSlotTime})`;
-      } else {
-        document.getElementById("currentStatus").innerText = `Break or No Class (${currentSlotTime})`;
-      }
-
-      // Search for next upcoming class after current slot
-      let nextClassInfo = "No upcoming class today";
-      for (let i = currentSlot + 1; i < todayClasses.length; i++) {
-        if (todayClasses[i] && todayClasses[i].trim() !== "" && todayClasses[i].trim().toUpperCase() !== "BREAK") {
-          nextClassInfo = `${todayClasses[i]} (${timeSlots[i]})`;
-          break;
-        }
-      }
-
-      document.getElementById("nextClass").innerText = nextClassInfo;
+    const currentVersion = 'v6'; // incremented version
+    if (localStorage.getItem('site-version') !== currentVersion) {
+      localStorage.setItem('site-version', currentVersion);
+      location.reload(true); 
     }
-
-    function manualTest() {
-      const selectedDay = document.getElementById("daySelect").value;
-      const selectedTime = document.getElementById("timeInput").value;
-      getCurrentClass(selectedDay, selectedTime);
-    }
-
-    // Auto detect real time (default)
-    getCurrentClass();
-    setInterval(getCurrentClass, 60 * 1000); // Auto refresh every minute
-
-    if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("/service-worker.js")
-      .then((reg) => console.log("Service Worker registered", reg))
-      .catch((err) => console.log("SW registration failed", err));
-  });
-}
-const dailyTips = [
-  "📘 Tip: Review class notes every evening for 15 mins!",
-  "🧠 Fun Fact: Studying before sleep helps retention.",
-  "💡 Tip: Take short breaks between long study sessions.",
-  "🚀 Motivation: You’re closer than you think!",
-  "📅 Planning: Update your goals every Sunday night.",
-  "🎯 Focus: Eliminate distractions for 25 mins and take 5 mins break.",
-  "🌱 Reminder: Progress > Perfection.",
-  "📚 Tip: Summarize what you learn in your own words.",
-  "🔋 Recharge: Sleep well – brain needs rest too.",
-  "📈 Boost: Try teaching a concept to someone else.",
-  "🔍 Trick: Use the Feynman Technique to deeply understand topics.",
-  "🎧 Hack: Try instrumental music while studying.",
-  "📝 Strategy: Set 3 micro-goals each morning.",
-  "🙌 Truth: Small consistent effort beats rare big effort."
-];
-const tipIndex = new Date().getDay() % dailyTips.length;
-document.getElementById("dailyTip").innerText = dailyTips[tipIndex];
-
   </script>
+</head>
+<body class="bg-surface text-on-surface font-body-lg min-h-screen flex flex-col md:flex-row">
+
+  <!-- Desktop SideNav -->
+  <nav class="hidden md:flex flex-col py-container-padding bg-surface-container-low border-r border-outline-variant h-screen w-64 fixed left-0 top-0 z-40">
+    <div class="px-container-padding mb-stack-lg">
+      <h1 class="font-headline-md text-headline-md font-bold text-primary mb-1">StudyHall</h1>
+      <div class="flex items-center gap-2 mt-4">
+        <div class="relative w-10 h-10 rounded-full object-cover border border-outline-variant bg-secondary-container overflow-hidden flex items-center justify-center">
+          <img class="sidebar-pic w-full h-full object-cover hidden" src="" alt="Profile" />
+          <span class="sidebar-icon material-symbols-outlined text-on-secondary-container">person</span>
+        </div>
+        <div>
+          <h2 class="sidebar-name font-title-sm text-title-sm text-on-surface">Student Name</h2>
+          <p class="sidebar-major font-body-sm text-body-sm text-on-surface-variant">Department</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="px-container-padding space-y-2 flex-grow">
+      <!-- Active Tab: Today -->
+      <a class="flex items-center gap-stack-md bg-secondary-container text-on-secondary-container rounded-xl px-stack-md py-stack-sm cursor-pointer transition-transform duration-150 active:scale-[0.98]" href="index.html">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+        <span class="font-title-sm text-title-sm">Today</span>
+      </a>
+      
+      <!-- Inactive Tabs -->
+      <a class="flex items-center gap-stack-md text-on-surface-variant px-stack-md py-stack-sm hover:bg-surface-container-high transition-colors cursor-pointer transition-transform duration-150 active:scale-[0.98] rounded-xl" href="timetable.html">
+        <span class="material-symbols-outlined">calendar_view_week</span>
+        <span class="font-title-sm text-title-sm">Weekly</span>
+      </a>
+      
+      <a class="flex items-center gap-stack-md text-on-surface-variant px-stack-md py-stack-sm hover:bg-surface-container-high transition-colors cursor-pointer transition-transform duration-150 active:scale-[0.98] rounded-xl" href="courses.html">
+        <span class="material-symbols-outlined">menu_book</span>
+        <span class="font-title-sm text-title-sm">Courses</span>
+      </a>
+      
+      <a class="flex items-center gap-stack-md text-on-surface-variant px-stack-md py-stack-sm hover:bg-surface-container-high transition-colors cursor-pointer transition-transform duration-150 active:scale-[0.98] rounded-xl" href="exams.html">
+        <span class="material-symbols-outlined">assignment_late</span>
+        <span class="font-title-sm text-title-sm">Exams</span>
+      </a>
+
+      <a class="flex items-center gap-stack-md text-on-surface-variant px-stack-md py-stack-sm hover:bg-surface-container-high transition-colors cursor-pointer transition-transform duration-150 active:scale-[0.98] rounded-xl" href="tasks.html">
+        <span class="material-symbols-outlined">checklist</span>
+        <span class="font-title-sm text-title-sm">Tasks</span>
+      </a>
+    </div>
+    
+    <div class="px-container-padding mt-auto space-y-4">
+      <div class="pt-4 border-t border-outline-variant space-y-2">
+        <a class="flex items-center gap-stack-md text-on-surface-variant px-stack-md py-stack-sm hover:bg-surface-container-high transition-colors rounded-xl" href="settings.html">
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-title-sm text-title-sm">Settings</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Top App Bar for Mobile -->
+  <header class="md:hidden flex justify-between items-center h-16 px-gutter w-full top-0 sticky bg-surface border-b border-surface-variant z-40">
+    <h1 class="font-headline-md-mobile text-headline-md-mobile font-bold text-primary">StudyHall</h1>
+    <div class="flex gap-4 text-secondary">
+      <span class="material-symbols-outlined cursor-pointer hover:text-primary-container transition-colors">notifications</span>
+      <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
+          <span class="material-symbols-outlined text-[16px] text-on-secondary-container">person</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Canvas -->
+  <main class="flex-grow md:ml-64 p-gutter md:p-container-padding max-w-[1200px] mx-auto w-full pb-24 md:pb-container-padding">
+    <header class="mb-stack-lg flex justify-between items-end">
+      <div>
+        <h2 class="font-display-lg text-display-lg text-on-surface" id="greeting">Good morning,</h2>
+        <p class="font-headline-md text-headline-md text-on-surface-variant mt-2" id="currentDateText">Here is your day at a glance.</p>
+      </div>
+      <div class="flex items-center gap-2 mt-4 sm:mt-0">
+        <label for="groupFilterSelect" class="font-title-sm text-title-sm text-on-surface-variant">Lab Group:</label>
+        <select id="groupFilterSelect" class="bg-surface border border-outline-variant rounded-lg px-3 py-1 font-title-sm text-title-sm text-on-surface focus:outline-none focus:border-primary">
+          <option value="Both">Both (X & Y)</option>
+          <option value="X">Group X</option>
+          <option value="Y">Group Y</option>
+        </select>
+      </div>
+    </header>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg">
+      <!-- Left Column: Timetable (Bento Grid Style) -->
+      <div class="lg:col-span-8 space-y-stack-lg">
+        
+        <!-- Next Class Hero -->
+        <section id="nextClassHero" class="bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding shadow-[0px_4px_12px_rgba(27,54,93,0.08)] relative overflow-hidden">
+          <div class="absolute right-0 top-0 w-32 h-32 bg-secondary-container rounded-bl-full opacity-20"></div>
+          
+          <div class="flex justify-between items-start mb-stack-md relative z-10">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#10B981] animate-pulse"></span>
+              <span class="font-label-caps text-label-caps text-on-surface-variant uppercase" id="currentStatusBadge">Up Next</span>
+            </div>
+          </div>
+          
+          <h3 id="currentStatusTitle" class="font-headline-md text-headline-md text-on-surface mb-2 relative z-10">Loading...</h3>
+          
+          <div class="flex flex-wrap gap-4 mb-stack-lg relative z-10">
+            <div class="flex items-center gap-1 text-on-surface-variant font-mono-label text-mono-label">
+              <span class="material-symbols-outlined text-[16px]">schedule</span>
+              <span id="currentStatusTime">--:--</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Vertical Timeline View -->
+        <section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding relative overflow-hidden">
+          <h3 class="font-title-sm text-title-sm text-on-surface mb-stack-md">Today's Schedule</h3>
+          
+          <div class="relative timeline-grid timeline-minor pt-4 pb-12 pl-16 min-h-[400px]" id="todayTimeline">
+            <!-- Time labels -->
+            <div class="absolute left-0 top-4 font-mono-label text-mono-label text-on-surface-variant">09:00</div>
+            <div class="absolute left-0 top-[64px] font-mono-label text-mono-label text-on-surface-variant">10:00</div>
+            <div class="absolute left-0 top-[124px] font-mono-label text-mono-label text-on-surface-variant">11:00</div>
+            <div class="absolute left-0 top-[184px] font-mono-label text-mono-label text-on-surface-variant">12:00</div>
+            <div class="absolute left-0 top-[244px] font-mono-label text-mono-label text-on-surface-variant">13:00</div>
+            <div class="absolute left-0 top-[304px] font-mono-label text-mono-label text-on-surface-variant">14:00</div>
+            <div class="absolute left-0 top-[364px] font-mono-label text-mono-label text-on-surface-variant">15:00</div>
+            <div class="absolute left-0 top-[424px] font-mono-label text-mono-label text-on-surface-variant">16:00</div>
+            <div class="absolute left-0 top-[484px] font-mono-label text-mono-label text-on-surface-variant">17:00</div>
+
+            <!-- Dynamic content injected via app.js -->
+          </div>
+        </section>
+      </div>
+      
+      <!-- Right Column: Widgets -->
+      <div class="lg:col-span-4 space-y-stack-lg">
+        <!-- Deadlines Widget (Demo) -->
+        <section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding">
+          <div class="flex justify-between items-center mb-stack-md">
+            <h3 class="font-title-sm text-title-sm text-on-surface">Upcoming Deadlines</h3>
+            <span class="material-symbols-outlined text-on-surface-variant text-[20px] cursor-pointer hover:text-primary">more_horiz</span>
+          </div>
+          <div class="space-y-stack-md">
+            <div class="flex gap-3 items-start border-b border-surface-variant pb-stack-sm">
+              <div class="bg-error-container text-on-error-container w-10 h-10 rounded flex flex-col items-center justify-center flex-shrink-0">
+                <span class="font-label-caps text-[10px] uppercase leading-none">Oct</span>
+                <span class="font-bold text-sm leading-tight">24</span>
+              </div>
+              <div>
+                <h4 class="font-title-sm text-body-lg text-on-surface leading-tight mb-1">Chem Lab Report</h4>
+                <p class="font-mono-label text-mono-label text-error">Due in 2 days</p>
+              </div>
+            </div>
+          </div>
+          <a href="tasks.html">
+            <button class="w-full mt-4 border border-outline-variant text-on-surface py-2 rounded-lg font-title-sm text-title-sm hover:bg-surface-container-low transition-colors text-center">
+              View All Tasks
+            </button>
+          </a>
+        </section>
+        
+        <!-- Tester Section -->
+        <section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding">
+          <h3 class="font-title-sm text-title-sm text-on-surface mb-stack-md">Tester Controls</h3>
+          <div class="flex flex-col gap-2">
+            <select id="daySelect" class="w-full bg-surface-bright border border-outline-variant rounded-lg p-2 font-body-sm">
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+            </select>
+            <input type="time" id="timeInput" class="w-full bg-surface-bright border border-outline-variant rounded-lg p-2 font-body-sm" value="10:00">
+            <button id="testBtn" class="bg-primary text-on-primary py-2 rounded-lg font-title-sm mt-2">Test Time</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-2 pb-safe bg-surface border-t border-surface-variant h-16 z-50">
+    <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200 active:scale-90" href="index.html">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event_note</span>
+      <span class="font-label-caps text-label-caps mt-1">Today</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-container-high rounded-full transition-all duration-200 active:scale-90" href="timetable.html">
+      <span class="material-symbols-outlined">grid_view</span>
+      <span class="font-label-caps text-label-caps mt-1">Schedule</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-container-high rounded-full transition-all duration-200 active:scale-90" href="courses.html">
+      <span class="material-symbols-outlined">class</span>
+      <span class="font-label-caps text-label-caps mt-1">Courses</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-container-high rounded-full transition-all duration-200 active:scale-90" href="tasks.html">
+      <span class="material-symbols-outlined">checklist</span>
+      <span class="font-label-caps text-label-caps mt-1">Tasks</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

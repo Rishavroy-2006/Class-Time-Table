@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>StudyHall - Exams</title>
+  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#faf9fd">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Space+Mono&amp;display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #e3e2e6; border-radius: 4px; }
+    .custom-scrollbar:hover::-webkit-scrollbar-thumb { background: #c4c6cf; }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-lg min-h-screen flex flex-col md:flex-row">
+
+  <!-- Desktop SideNav -->
+  <nav class="hidden md:flex flex-col py-container-padding bg-surface-container-low border-r border-outline-variant h-screen w-64 fixed left-0 top-0 z-40">
+    <div class="px-container-padding mb-stack-lg">
+      <h1 class="font-headline-md text-headline-md font-bold text-primary mb-1">StudyHall</h1>
+      <div class="flex items-center gap-2 mt-4">
+        <div class="relative w-10 h-10 rounded-full object-cover border border-outline-variant bg-secondary-container overflow-hidden flex items-center justify-center">
+          <img class="sidebar-pic w-full h-full object-cover hidden" src="" alt="Profile" />
+          <span class="sidebar-icon material-symbols-outlined text-on-secondary-container">person</span>
+        </div>
+        <div>
+          <h2 class="sidebar-name font-title-sm text-title-sm text-on-surface">Student Name</h2>
+          <p class="sidebar-major font-body-sm text-body-sm text-on-surface-variant">Department</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="px-container-padding space-y-2 flex-grow">
+      <!-- Active Tab: Today -->
+      <a class="flex items-center gap-stack-md text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-xl px-stack-md py-stack-sm cursor-pointer transition-transform duration-150 active:scale-[0.98]" href="index.html">
+        <span class="material-symbols-outlined" >dashboard</span>
+        <span class="font-title-sm text-title-sm">Today</span>
+      </a>
+      
+      <!-- Inactive Tabs -->
+      <a class="flex items-center gap-stack-md text-on-surface-variant px-stack-md py-stack-sm hover:bg-surface-container-high transition-colors cursor-pointer transition-transform duration-150 active:scale-[0.98] rounded-xl" href="timetable.html">
+        <span class="material-symbols-outlined">calendar_view_week</span>
+        <span class="font-title-sm text-title-sm">Weekly</span>
+      </a>
+      
+      <a class="flex items-center gap-stack-md text-on-surface-variant px-stack-md py-stack-sm hover:bg-surface-container-high transition-colors cursor-pointer transition-transform duration-150 active:scale-[0.98] rounded-xl" href="courses.html">
+        <span class="material-symbols-outlined">menu_book</span>
+        <span class="font-title-sm text-title-sm">Courses</span>
+      </a>
+      
+      <a class="flex items-center gap-stack-md bg-secondary-container text-on-secondary-container rounded-xl px-stack-md py-stack-sm cursor-pointer transition-transform duration-150 active:scale-[0.98]" href="exams.html">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_late</span>
+        <span class="font-title-sm text-title-sm">Exams</span>
+      </a>
+
+      <a class="flex items-center gap-stack-md text-on-surface-variant px-stack-md py-stack-sm hover:bg-surface-container-high transition-colors cursor-pointer transition-transform duration-150 active:scale-[0.98] rounded-xl" href="tasks.html">
+        <span class="material-symbols-outlined">checklist</span>
+        <span class="font-title-sm text-title-sm">Tasks</span>
+      </a>
+    </div>
+    
+    <div class="px-container-padding mt-auto space-y-4">
+      <div class="pt-4 border-t border-outline-variant space-y-2">
+        <a class="flex items-center gap-stack-md text-on-surface-variant px-stack-md py-stack-sm hover:bg-surface-container-high transition-colors rounded-xl" href="settings.html">
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-title-sm text-title-sm">Settings</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Canvas -->
+  <!-- Top App Bar for Mobile -->
+  <header class="md:hidden flex justify-between items-center h-16 px-gutter w-full top-0 sticky bg-surface border-b border-surface-variant z-40">
+    <h1 class="font-headline-md-mobile text-headline-md-mobile font-bold text-primary">StudyHall</h1>
+    <div class="flex gap-4 text-secondary">
+      <span class="material-symbols-outlined cursor-pointer hover:text-primary-container transition-colors">notifications</span>
+      <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
+          <span class="material-symbols-outlined text-[16px] text-on-secondary-container">person</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow md:ml-64 p-gutter md:p-container-padding max-w-[1200px] mx-auto w-full pb-24 md:pb-container-padding">
+    <!-- Header -->
+    <header class="h-16 flex items-center justify-between px-container-padding border-b border-surface-variant flex-shrink-0 bg-surface z-10">
+      <div>
+        <h1 class="font-headline-md text-headline-md text-primary">Exams</h1>
+      </div>
+      <div class="flex items-center gap-stack-md">
+        <button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-title-sm text-title-sm flex items-center gap-2 hover:bg-primary-container transition-colors">
+          <span class="material-symbols-outlined text-[20px]">add</span>
+          New Exam
+        </button>
+      </div>
+    </header>
+    
+    <!-- Kanban Board Area -->
+    <div class="flex-1 overflow-x-auto overflow-y-hidden custom-scrollbar bg-surface-bright pb-16 md:pb-0">
+      <div class="h-full flex gap-container-padding p-container-padding w-max min-w-full">
+        <!-- Column 1: This Week -->
+        <div class="w-80 sm:w-96 flex flex-col flex-shrink-0 bg-surface-container-low rounded-xl border border-outline-variant/30">
+          <div class="p-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container/50 rounded-t-xl">
+            <div class="flex items-center gap-2">
+              <h2 class="font-title-sm text-title-sm text-on-surface">This Week</h2>
+              <span class="text-on-surface-variant active:bg-surface-container-high font-mono-label text-mono-label px-2 py-0.5 rounded-full">1</span>
+            </div>
+          </div>
+          <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-stack-md custom-scrollbar">
+            <!-- Task Card -->
+            <div class="bg-surface border border-outline-variant/50 rounded-lg p-4 hover:shadow-[0px_4px_12px_rgba(27,54,93,0.08)] transition-all cursor-grab relative overflow-hidden group">
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-fixed-dim"></div>
+              <div class="flex justify-between items-start mb-2">
+                <span class="text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-caps text-label-caps px-2 py-1 rounded-sm uppercase tracking-wider">Assignment</span>
+              </div>
+              <h3 class="font-title-sm text-title-sm text-on-surface mb-1">Linear Algebra P-Set 4</h3>
+              <div class="mt-4 flex items-center justify-between border-t border-outline-variant/30 pt-3">
+                <div class="flex items-center gap-1 text-error font-mono-label text-mono-label">
+                  <span class="material-symbols-outlined text-[14px]">event</span>
+                  Due Tomorrow, 11:59 PM
+                </div>
+                <div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center hover:border-primary hover:bg-surface-container transition-colors cursor-pointer">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Column 2: Upcoming -->
+        <div class="w-80 sm:w-96 flex flex-col flex-shrink-0 bg-surface-container-low rounded-xl border border-outline-variant/30">
+          <div class="p-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container/50 rounded-t-xl">
+            <div class="flex items-center gap-2">
+              <h2 class="font-title-sm text-title-sm text-on-surface">Upcoming</h2>
+              <span class="bg-surface-variant text-on-surface-variant font-mono-label text-mono-label px-2 py-0.5 rounded-full">1</span>
+            </div>
+          </div>
+          <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-stack-md custom-scrollbar">
+            <!-- Task Card -->
+            <div class="bg-surface border border-outline-variant/50 rounded-lg p-4 hover:shadow-[0px_4px_12px_rgba(27,54,93,0.08)] transition-all cursor-grab relative overflow-hidden group opacity-80 hover:opacity-100">
+              <div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary-fixed-dim"></div>
+              <div class="flex justify-between items-start mb-2">
+                <span class="bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps px-2 py-1 rounded-sm uppercase tracking-wider">Project</span>
+              </div>
+              <h3 class="font-title-sm text-title-sm text-on-surface mb-1">History Term Paper Draft</h3>
+              <div class="mt-4 flex items-center justify-between border-t border-outline-variant/30 pt-3">
+                <div class="flex items-center gap-1 text-on-surface-variant font-mono-label text-mono-label">
+                  <span class="material-symbols-outlined text-[14px]">event</span>
+                  Nov 12
+                </div>
+                <div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center hover:border-primary hover:bg-surface-container transition-colors cursor-pointer">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Column 3: Completed -->
+        <div class="w-80 sm:w-96 flex flex-col flex-shrink-0 bg-surface-container-low rounded-xl border border-outline-variant/30 opacity-70">
+          <div class="p-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container/50 rounded-t-xl">
+            <div class="flex items-center gap-2">
+              <h2 class="font-title-sm text-title-sm text-on-surface">Completed</h2>
+            </div>
+          </div>
+          <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-stack-md custom-scrollbar">
+            <!-- Empty State -->
+            <div class="flex flex-col items-center justify-center h-32 text-on-surface-variant/50">
+              <span class="material-symbols-outlined text-4xl mb-2">task_alt</span>
+              <span class="font-mono-label text-mono-label">No recently completed items</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-2 pb-safe bg-surface border-t border-surface-variant h-16 z-50">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container-high rounded-full px-4 py-1 transition-all duration-200 active:scale-90" href="index.html">
+      <span class="material-symbols-outlined" >event_note</span>
+      <span class="font-label-caps text-label-caps mt-1">Today</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-container-high rounded-full transition-all duration-200 active:scale-90" href="timetable.html">
+      <span class="material-symbols-outlined">grid_view</span>
+      <span class="font-label-caps text-label-caps mt-1">Schedule</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-container-high rounded-full transition-all duration-200 active:scale-90" href="courses.html">
+      <span class="material-symbols-outlined">class</span>
+      <span class="font-label-caps text-label-caps mt-1">Courses</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-container-high rounded-full transition-all duration-200 active:scale-90" href="tasks.html">
+      <span class="material-symbols-outlined">checklist</span>
+      <span class="font-label-caps text-label-caps mt-1">Tasks</span>
+    </a>
+  </nav>
+
+</body>
+</html>

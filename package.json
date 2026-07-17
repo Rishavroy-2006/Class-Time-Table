@@ -1,0 +1,29 @@
+{
+  "name": "class-time-table",
+  "version": "1.0.0",
+  "description": "A sleek, interactive **College Class Timetable Web App**, built using **HTML, CSS, and JavaScript**, and developed with assistance from **AI tools like ChatGPT**. Hosted on Vercel, it’s fully responsive and designed to simplify how students track their weekly class schedule.",
+  "main": "service-worker.js",
+  "scripts": {
+    "build": "tailwindcss -i ./css/input.css -o ./css/styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rishavroy-2006/Class-Time-Table.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Rishavroy-2006/Class-Time-Table/issues"
+  },
+  "homepage": "https://github.com/Rishavroy-2006/Class-Time-Table#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.11",
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.19",
+    "tailwindcss": "^3.4.19"
+  }
+}

@@ -1,8 +1,15 @@
-const CACHE_NAME = "v4"; // Increment the version each time you deploy
+const CACHE_NAME = "v6"; // Increment the version each time you deploy
 
 const urlsToCache = [
   "/",
   "/index.html",
+  "/timetable.html",
+  "/courses.html",
+  "/tasks.html",
+  "/exams.html",
+  "/css/styles.css",
+  "/js/data.js",
+  "/js/app.js",
   "/manifest.json",
   "/icon-192.png",
   "/icon-512.png"
